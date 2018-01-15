@@ -66,8 +66,10 @@ server {
         # include snippets/snakeoil.conf;
 
         expires $expires;
-
-        include snippets/ssl-vinirmititech.com.conf;
+        
+        ssl_certificate /etc/letsencrypt/live/vinirmititech.com/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/vinirmititech.com/privkey.pem;
+        #include snippets/ssl-vinirmititech.com.conf;
         include snippets/ssl-params.conf;
 
         # root if directory from where statci files are served
