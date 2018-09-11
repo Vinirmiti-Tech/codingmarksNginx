@@ -1,0 +1,58 @@
+version: '3.1'
+
+services:
+
+    mysql:
+        image: mysql:5.6.41
+        restart: always
+        environment:
+            MYSQL_DATABASE: keycloak
+            MYSQL_USER: keycloak
+            MYSQL_PASSWORD: passport1
+            MYSQL_ROOT_PASSWORD: passport1
+        volumes:
+            - 'D:/programes/sqldata:/var/lib/mysql'
+        networks:
+            - app-network
+
+    # mysql admin website
+#    adminer:
+#        image: adminer
+#        restart: always
+#        ports:
+#            - 8082:8080
+#        networks:
+#            - app-network
+#        deploy:
+#            replicas: 5
+##            resources:
+#            limits:
+#                cpus: "0.1"
+##                memory: 50M
+#            restart_policy:
+#            condition: on-failure
+
+    keycloak:
+        image: jboss/keycloak:4.4.0.Final
+        restart: always
+        depends_on:
+            - mysql
+        environment:
+            MYSQL_DATABASE: keycloak
+            MYSQL_USER: keycloak
+            MYSQL_PASSWORD: passport1
+            PROXY_ADDRESS_FORWARDING: "true"
+        # following ports line not for production
+        ports:
+            - 8080:8080
+        networks:
+            - app-network
+            
+#    tempservice:
+#        build: # directory of dockerfile. Hence we do no need to upload docker file to docker hub. and pull the image always
+            
+            
+networks:
+  app-network:
+    external: true      
+   
