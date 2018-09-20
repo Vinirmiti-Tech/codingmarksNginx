@@ -25,23 +25,22 @@ rootUser:
   ##
   ## Option to force users to specify a password. That is required for 'helm upgrade' to work properly.
   ## If it is not force, a random password will be generated.
-  forcePassword: false
+  forcePassword: true
   
 db:
   ## MariaDB username and password
   ## ref: https://github.com/bitnami/bitnami-docker-mariadb#creating-a-database-user-on-first-run
   ##
-  user:
+  user: keycloak
   password:
   ## Password is ignored if existingSecret is specified.
   ## Database to create
   ## ref: https://github.com/bitnami/bitnami-docker-mariadb#creating-a-database-on-first-run
   ##
-  name: my_database
+  name: keycloak
   ## Option to force users to specify a password. That is required for 'helm upgrade' to work properly.
   ## If it is not force, a random password will be generated.
-  forcePassword: false
-  
+  forcePassword: true
   
 replication:
   ## Enable replication. This enables the creation of replicas of MariaDB. If false, only a
@@ -93,7 +92,6 @@ master:
     size: 8Gi
     ##
     
-    
 slave:
   replicas: 1  
   persistence:
@@ -107,7 +105,8 @@ slave:
     ## Persistent Volume size
     ##
     size: 8Gi
-    ##    
+    ##  
+    
 metrics:
   enabled: false
   image:
@@ -119,5 +118,4 @@ metrics:
   annotations:
     prometheus.io/scrape: "true"
     prometheus.io/port: "9104"    
-    
     
