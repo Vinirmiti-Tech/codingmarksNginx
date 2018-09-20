@@ -1,0 +1,123 @@
+
+image:
+  registry: docker.io
+  repository: bitnami/mariadb
+  tag: 10.1.36-debian-9
+  
+service:
+  ## Kubernetes service type, ClusterIP and NodePort are supported at present
+  type: ClusterIP
+  port: 3306
+  ## Specify the nodePort value for the LoadBalancer and NodePort service types.
+  ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport
+  ##
+  # nodePort:
+  #   master: 30001
+  #   slave: 30002
+  
+rootUser:
+  ## MariaDB admin password
+  ## ref: https://github.com/bitnami/bitnami-docker-mariadb#setting-the-root-password-on-first-run
+  ##
+  password:
+  ## Use existing secret (ignores root, db and replication passwords)
+  # existingSecret:
+  ##
+  ## Option to force users to specify a password. That is required for 'helm upgrade' to work properly.
+  ## If it is not force, a random password will be generated.
+  forcePassword: false
+  
+db:
+  ## MariaDB username and password
+  ## ref: https://github.com/bitnami/bitnami-docker-mariadb#creating-a-database-user-on-first-run
+  ##
+  user:
+  password:
+  ## Password is ignored if existingSecret is specified.
+  ## Database to create
+  ## ref: https://github.com/bitnami/bitnami-docker-mariadb#creating-a-database-on-first-run
+  ##
+  name: my_database
+  ## Option to force users to specify a password. That is required for 'helm upgrade' to work properly.
+  ## If it is not force, a random password will be generated.
+  forcePassword: false
+  
+  
+replication:
+  ## Enable replication. This enables the creation of replicas of MariaDB. If false, only a
+  ## master deployment would be created
+  enabled: true
+  ##
+  ## MariaDB replication user
+  ## ref: https://github.com/bitnami/bitnami-docker-mariadb#setting-up-a-replication-cluster
+  ##
+  user: replicator
+  ## MariaDB replication user password
+  ## ref: https://github.com/bitnami/bitnami-docker-mariadb#setting-up-a-replication-cluster
+  ##
+  password:
+  ## Password is ignored if existingSecret is specified.
+  ##
+  ## Option to force users to specify a password. That is required for 'helm upgrade' to work properly.
+  ## If it is not force, a random password will be generated.
+  forcePassword: false
+  
+master:
+  ## Enable persistence using Persistent Volume Claims
+  ## ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
+  ##
+  persistence:
+    ## If true, use a Persistent Volume Claim, If false, use emptyDir
+    ##
+    enabled: true
+    # Enable persistence using an existing PVC
+    # existingClaim:
+    # mountPath:
+    ## Persisten Volume Storage Class
+    ## If defined, storageClassName: <storageClass>
+    ## If set to "-", storageClassName: "", which disables dynamic provisioning
+    ## If undefined (the default) or set to null, no storageClassName spec is
+    ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
+    ##   GKE, AWS & OpenStack)
+    ##
+    # storageClass: "-"
+    ## Persistent Volume Claim annotations
+    ##
+    annotations:
+    ## Persistent Volume Access Mode
+    ##
+    accessModes:
+    - ReadWriteOce
+    ## Persistent Volume size
+    ##
+    size: 8Gi
+    ##
+    
+    
+slave:
+  replicas: 1  
+  persistence:
+    ## If true, use a Persistent Volume Claim, If false, use emptyDir
+    ##
+    enabled: true
+    # storageClass: "-"
+    annotations:
+    accessModes:
+    - ReadWriteOnce
+    ## Persistent Volume size
+    ##
+    size: 8Gi
+    ##    
+metrics:
+  enabled: false
+  image:
+    registry: docker.io
+    repository: prom/mysqld-exporter
+    tag: v0.10.0
+    pullPolicy: IfNotPresent
+  resources: {}
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "9104"    
+    
+    
