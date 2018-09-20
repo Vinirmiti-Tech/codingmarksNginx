@@ -1,3 +1,12 @@
+# helm is package manager for kubernates
+# starting deployment from helm is completely different process
+# here you can just do helm install, it will take care of everything
+# helm install --name my-release -f mariadb.yaml stable/mariadb
+# do List all releases using helm list
+# helm search mariadb
+# helm delete my-release
+
+
 
 image:
   registry: docker.io
