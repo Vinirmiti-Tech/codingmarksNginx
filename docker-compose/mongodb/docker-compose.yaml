@@ -1,0 +1,41 @@
+version: '2'
+
+# it is docker-compose version 3.1, same file can be used with docker swarm, with small change
+# changes such as, docker swarm does not use bridge network, it uses overlay network (overlay networkspans cross mutiple noed machines)
+# we just need to add deploy param in this file.
+
+# first run without security , add user in admin database and add security
+# MONGODB_ROOT_PASSWORD not setting root use in windows
+
+# mongo -u mongodb -p xyz --authenticationDatabase appadmin
+# mongo -u root -p xyz --authenticationDatabase admin
+
+# add sql and mongodb both database in same disc
+
+# This is single replica set docker-compose file
+
+services:  
+            
+    mongodb:
+        image: 'bitnami/mongodb:4.0.2'
+        restart: always
+        # following ports line not for production
+        ports:
+            - "27017:27017"
+        # Creation of a user OR setting MONGODB_ROOT_PASSWORD enables authentication on the MongoDB server
+        environment:
+            MONGODB_ROOT_PASSWORD: xyz
+        #    MONGODB_DATABASE: appadmin
+        #    MONGODB_USERNAME: mongodb
+        #    MONGODB_PASSWORD: xyz
+        # Volume mount path MUST needed to be changed
+        volumes:
+            - '/mnt/discs/mongodb:/bitnami'  
+        networks:
+            - app-network
+            
+            
+networks:
+  app-network:
+    external: true      
+   
