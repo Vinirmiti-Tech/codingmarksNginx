@@ -1,0 +1,43 @@
+version: '3.1'
+
+# it is docker-compose version 3.1, same file can be used with docker swarm, with small change
+# changes such as, docker swarm does not use bridge network, it uses overlay network (overlay networkspans cross mutiple noed machines)
+# we just need to add deploy param in this file.
+
+# at build location we must need to provide directory in which Dockerfile present
+# to build image in docker we use :  cd to directory where dockerfile present & docker build . --tag frontend:1
+# backend was built (image created) because it did not already exist. To rebuild this image you must use `docker-compose build` or `docker-compose up --build`.
+
+# images are build again with latest tag, 
+services:
+    
+    backend:
+        build: D:\programes\app
+        restart: always
+        networks:
+            - app-network  
+        # following ports line not needed in production
+        #ports:
+        #    - 81:80
+
+            
+    frontend:
+        build: D:\programes\app
+        restart: always
+        depends_on:
+            - backend
+        ports:
+            - 80:80
+            - 443:443
+        volumes:
+            - '/etc/letsencrypt:/etc/letsencrypt'
+            - '/var/log/letsencrypt:/var/log/letsencrypt'
+            - '/etc/ssl:/etc/ssl'
+        networks:
+            - app-network            
+            
+            
+networks:
+  app-network:
+    external: true      
+   
