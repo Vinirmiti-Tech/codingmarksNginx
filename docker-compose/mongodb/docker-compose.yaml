@@ -1,4 +1,4 @@
-version: '3.1'
+kversion: '3.1'
 #version: '2'
 
 # it is docker-compose version 3.1, same file can be used with docker swarm, with small change
@@ -31,7 +31,7 @@ services:
         #    MONGODB_PASSWORD: xyz
         # Volume mount path MUST needed to be changed
         volumes:
-            - '/mnt/discs/mongodb:/bitnami'  
+            - '/mnt/disks/mongodb:/bitnami'  
         networks:
             - app-network
             
