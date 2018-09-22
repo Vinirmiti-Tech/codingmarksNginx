@@ -7,4 +7,8 @@ Before you can push or pull images, you must configure Docker to use the gcloud 
 authenticate requests to Container Registry. To do so, run the following command (you are only required to do this once):
 gcloud auth configure-docker
 
-you may need to generate ssh keys using jenkins user and add it to bitbucket repository settings > Access keys
+We need to generate ssh keys using jenkins user and add it to webapp machine known hosts, so we can connect to 
+webapp machine to perform some operation
+ssh vinirmititemp2@webapp
+
+bitbucket repository settings > Access keys
