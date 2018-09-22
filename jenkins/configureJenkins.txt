@@ -1,0 +1,10 @@
+install maven and docker
+all jobs are started with jenkins user
+
+do step 3 and 5 from following url, remember $user is jenkins: https://cloud.google.com/container-registry/docs/quickstart
+
+Before you can push or pull images, you must configure Docker to use the gcloud command-line tool to 
+authenticate requests to Container Registry. To do so, run the following command (you are only required to do this once):
+gcloud auth configure-docker
+
+you may need to generate ssh keys using jenkins user and add it to bitbucket repository settings > Access keys
