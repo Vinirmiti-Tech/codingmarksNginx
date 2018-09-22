@@ -12,8 +12,8 @@ services:
         environment:
             MYSQL_DATABASE: keycloak
             MYSQL_USER: keycloak
-            MYSQL_PASSWORD: passport1
-            MYSQL_ROOT_PASSWORD: passport1
+            MYSQL_PASSWORD: xxx
+            MYSQL_ROOT_PASSWORD: xxx
         volumes:
             - 'D:/programes/sqldata:/var/lib/mysql'
         networks:
@@ -48,7 +48,7 @@ services:
             DB_ADDR: mysql
             DB_DATABASE: keycloak
             DB_USER: keycloak
-            DB_PASSWORD: passport1
+            DB_PASSWORD: xxx
             PROXY_ADDRESS_FORWARDING: "true"
         # following ports line not for production
         ports:
