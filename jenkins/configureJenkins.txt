@@ -12,3 +12,6 @@ webapp machine to perform some operation
 ssh vinirmititemp2@webapp
 
 bitbucket repository settings > Access keys
+
+you may also need to install npm & nodejs (preferably 8.x)
+also :: npm install -g @angular/cli  :: for ng build --prod to run
