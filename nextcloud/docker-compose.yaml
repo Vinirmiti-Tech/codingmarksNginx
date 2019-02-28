@@ -20,6 +20,8 @@ services:
     ports:
       - 80:80
     container_name: nextcloud-app
+    links:
+      - db
     networks:
       - nextcloud_network
     depends_on:
