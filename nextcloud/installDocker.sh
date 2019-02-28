@@ -24,6 +24,14 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io
 
 sudo docker --version
 
+if [ $? -eq 0 ]; then
+    echo Docker installation OK
+else
+    echo ERROR: Docker installation failed. Use another method to install docker. Then install docker compose.
+    echo Run installNextCloud.sh only after successful installation of both docker and docker-compose
+    exit 0
+fi
+
 ########## install compose
 
 sudo curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
