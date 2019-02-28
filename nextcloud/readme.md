@@ -1,5 +1,6 @@
-First get these three file using wget
-Run following command in terminal in linux
+**LINUX**
+
+Run following command in terminal in linux by user having sudo capabilities
 ```
 wget https://raw.githubusercontent.com/Vinirmiti-Tech/codingmarksNginx/master/nextcloud/docker-compose.yaml
 wget https://raw.githubusercontent.com/Vinirmiti-Tech/codingmarksNginx/master/nextcloud/installDocker.sh
