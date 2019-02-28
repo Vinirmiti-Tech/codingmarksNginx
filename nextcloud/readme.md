@@ -13,4 +13,4 @@ chmod +x installNextCloud.sh
 
 
 
-For window:
+
