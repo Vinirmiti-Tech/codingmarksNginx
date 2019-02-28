@@ -3,7 +3,7 @@ version: '3'
   services:
   
     db:
-      image: mariadb
+      image: mariadb:10.3-bionic
       container_name: nextcloud-mariadb
       networks:
         - nextcloud_network
@@ -18,7 +18,7 @@ version: '3'
       restart: unless-stopped
 
     app:
-      image: nextcloud:latest
+      image: nextcloud:15.0-apache
       container_name: nextcloud-app
       networks:
         - nextcloud_network
